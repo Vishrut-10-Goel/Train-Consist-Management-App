@@ -1,5 +1,32 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+class Bogie {
+    private String name;
+    private int capacity;
+
+    // Constructor
+    public Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    // Override toString for easy printing
+    @Override
+    public String toString() {
+        return name + " → " + capacity + " seats";
+    }
+}
 
 public class TrainConsistManagementApp {
 
@@ -7,21 +34,28 @@ public class TrainConsistManagementApp {
         // Welcome message
         System.out.println("=== Train Consist Management App ===");
 
-        // Initialize HashMap for bogie-capacity mapping
-        Map<String, Integer> bogieCapacity = new HashMap<>();
+        // Create a list of passenger bogies
+        List<Bogie> passengerBogies = new ArrayList<>();
+        passengerBogies.add(new Bogie("Sleeper", 72));
+        passengerBogies.add(new Bogie("AC Chair", 56));
+        passengerBogies.add(new Bogie("First Class", 24));
 
-        // Insert bogies with their capacities
-        bogieCapacity.put("Sleeper", 72);      // 72 seats
-        bogieCapacity.put("AC Chair", 56);     // 56 seats
-        bogieCapacity.put("First Class", 24);  // 24 seats
+        // Display unsorted bogies
+        System.out.println("Unsorted bogies:");
+        for (Bogie bogie : passengerBogies) {
+            System.out.println(bogie);
+        }
 
-        // Display bogie-capacity details using entrySet()
-        System.out.println("Bogie Capacity Details:");
-        for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
-            System.out.println(entry.getKey() + " → " + entry.getValue() + " seats");
+        // Sort bogies by capacity using Comparator
+        passengerBogies.sort(Comparator.comparingInt(Bogie::getCapacity));
+
+        // Display sorted bogies
+        System.out.println("\nBogies sorted by capacity:");
+        for (Bogie bogie : passengerBogies) {
+            System.out.println(bogie);
         }
 
         // Program continues...
-        System.out.println("Train operations continue with mapped capacities...");
+        System.out.println("\nTrain operations continue with sorted capacity planning...");
     }
 }
